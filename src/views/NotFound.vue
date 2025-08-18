@@ -11,7 +11,7 @@
                     <div class="lg:mb-0 flex gap-5 mb-10">
 
                             <router-link
-                            class="hover:bg-always-green-grass focus:ring-alwbg-always-green-grass sm:w-auto w-full px-[17px] py-[9px] font-semibold text-center text-white transition-all duration-300 bg-always-green-grass rounded-md whitespace-nowrap" to="/">
+                            class="hover:bg-main focus:ring-alwbg-main sm:w-auto w-full px-[17px] py-[9px] font-semibold text-center text-white transition-all duration-300 bg-main rounded-md whitespace-nowrap" to="/">
                             Back to Home
                         </router-link>
                     </div>

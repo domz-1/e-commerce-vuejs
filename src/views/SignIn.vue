@@ -3,7 +3,7 @@
         <section class="md:my-16 my-8">
             <div class="container px-4 mx-auto">
                 <div class="justify-evenly md:flex-row flex flex-col items-center">
-                    <div class="lg:order-1 order-2 px-4"><img src="../../public/signin.png" alt="signin-img">
+                    <div class="lg:order-1 order-2 px-4"><img src="../../public/signin.svg" alt="signin-img">
                     </div>
                     <div class="lg:order-2 md:mb-0 order-1 px-4 mb-10">
                         <div class="mb-6">
@@ -49,11 +49,12 @@
                                 </div>
                             </div>
                             <button type="submit" :disabled="isSubmitting"
-                                class="hover:bg-always-green-grass focus:ring-always-green-grass disabled:opacity-65 disabled:cursor-not-allowed w-full px-4 py-2 mx-auto mt-5 font-semibold text-center text-white transition-all duration-300 bg-always-green-grass rounded-lg cursor-pointer">
+                                class="hover:bg-young-night focus:ring-main disabled:opacity-65 disabled:cursor-not-allowed w-full px-4 py-2 mx-auto mt-5 font-semibold text-center text-white transition-all duration-300 bg-main rounded-lg cursor-pointer">
+
                                 Sign Up
                             </button>
                             <p class="mt-5 text-base font-medium">Don't have an account?
-                                <router-link to="/signup" class="text-always-green-grass">
+                                <router-link to="/signup" class="text-main">
                                     Sign Up
                                 </router-link>
                             </p>

@@ -28,7 +28,7 @@ const toggleMobileMenu = () => {
         <div class="max-w-7xl md:px-6 lg:px-8 px-2 mx-auto">
             <div class="relative flex items-center justify-between h-16">
                 <div class="md:hidden absolute inset-y-0 left-0 flex items-center gap-2">
-                    <div class="inline-flex items-center justify-center p-1.5 rounded-md text-always-green-grass border-always-green-grass border cursor-pointer ml-1"
+                    <div class="inline-flex items-center justify-center p-1.5 rounded-md text-main border-main border cursor-pointer ml-1"
                         @click="toggleMobileMenu">
                         <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512"
                             class="w-6 h-6" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -55,25 +55,25 @@ const toggleMobileMenu = () => {
                             <li class="flex items-center justify-center">
                                 <RouterLink to="/" :class="[
                                     'px-3 py-1.5 rounded-md font-semibold transition-all duration-300',
-                                    isActive('/') ? 'bg-always-green-grass text-white' : 'text-gray-500'
+                                    isActive('/') ? 'bg-main text-white' : 'text-gray-500'
                                 ]">Home</RouterLink>
                             </li>
                             <li class="flex items-center justify-center">
                                 <RouterLink to="/products" :class="[
                                     'px-3 py-1.5 rounded-md font-semibold transition-all duration-300',
-                                    isActive('/products') ? 'bg-always-green-grass text-white' : 'text-gray-500'
+                                    isActive('/products') ? 'bg-main text-white' : 'text-gray-500'
                                 ]">Products</RouterLink>
                             </li>
                             <li class="flex items-center justify-center">
                                 <RouterLink to="/brands" :class="[
                                     'px-3 py-1.5 rounded-md font-semibold transition-all duration-300',
-                                    isActive('/brands') ? 'bg-always-green-grass text-white' : 'text-gray-500'
+                                    isActive('/brands') ? 'bg-main text-white' : 'text-gray-500'
                                 ]">Brands</RouterLink>
                             </li>
                             <li class="flex items-center justify-center">
                                 <RouterLink to="/categories" :class="[
                                     'px-3 py-1.5 rounded-md font-semibold transition-all duration-300',
-                                    isActive('/categories') ? 'bg-always-green-grass text-white' : 'text-gray-500'
+                                    isActive('/categories') ? 'bg-main text-white' : 'text-gray-500'
                                 ]">Categories</RouterLink>
                             </li>
                         </div>
@@ -81,12 +81,12 @@ const toggleMobileMenu = () => {
                 </div>
                 <div v-if="!isLoggedIn" class="md:static md:inset-auto md:ml-6 md:pr-0 absolute inset-y-0 right-0 flex items-center pr-2">
                     <RouterLink
-                        class="sm:py-2 sm:px-4 bg-transparent border-2 border-always-green-grass rounded-lg text-gray-500 sm:text-base hover:bg-always-green-grass hover:text-white text-sm pb-[5px] pt-1 px-2"
+                        class="sm:py-2 sm:px-4 bg-transparent border-2 border-main rounded-lg text-gray-500 sm:text-base hover:bg-main hover:text-white text-sm pb-[5px] pt-1 px-2"
                         to="/signin">Sign In / Sign Up</RouterLink>
                 </div>
                 <div v-else class="md:static md:inset-auto md:ml-6 md:pr-0 absolute inset-y-0 right-0 flex items-center pr-2" @click="signOut">
                     <RouterLink
-                        class="sm:py-2 sm:px-4 bg-transparent border-2 border-always-green-grass rounded-lg text-gray-500 sm:text-base hover:bg-always-green-grass hover:text-white text-sm pb-[5px] pt-1 px-2"
+                        class="sm:py-2 sm:px-4 bg-transparent border-2 border-main rounded-lg text-gray-500 sm:text-base hover:bg-main hover:text-white text-sm pb-[5px] pt-1 px-2"
                         to="/signin">Sign out </RouterLink>
                 </div>
 
@@ -97,25 +97,25 @@ const toggleMobileMenu = () => {
                 <li class="flex items-center justify-start ml-2">
                     <RouterLink to="/" :class="[
                         'px-3 py-1.5 rounded-md font-semibold transition-all duration-300 m-1 text-base',
-                        isActive('/') ? 'bg-always-green-grass text-white' : 'text-gray-500'
+                        isActive('/') ? 'bg-main text-white' : 'text-gray-500'
                     ]">Home</RouterLink>
                 </li>
                 <li class="flex items-center justify-start ml-2">
                     <RouterLink to="/products" :class="[
                         'px-3 py-1.5 rounded-md font-semibold transition-all duration-300 m-1 text-base',
-                        isActive('/products') ? 'bg-always-green-grass text-white' : 'text-gray-500'
+                        isActive('/products') ? 'bg-main text-white' : 'text-gray-500'
                     ]">Products</RouterLink>
                 </li>
                 <li class="flex items-center justify-start ml-2">
                     <RouterLink to="/brands" :class="[
                         'px-3 py-1.5 rounded-md font-semibold transition-all duration-300 m-1 text-base',
-                        isActive('/brands') ? 'bg-always-green-grass text-white' : 'text-gray-500'
+                        isActive('/brands') ? 'bg-main text-white' : 'text-gray-500'
                     ]">Brands</RouterLink>
                 </li>
                 <li class="flex items-center justify-start ml-2">
                     <RouterLink to="/categories" :class="[
                         'px-3 py-1.5 rounded-md font-semibold transition-all duration-300 m-1 text-base',
-                        isActive('/categories') ? 'bg-always-green-grass text-white' : 'text-gray-500'
+                        isActive('/categories') ? 'bg-main text-white' : 'text-gray-500'
                     ]">Categories</RouterLink>
                 </li>
             </div>

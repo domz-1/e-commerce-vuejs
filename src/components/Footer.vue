@@ -12,7 +12,7 @@
             <div class="sm:flex-row sm:gap-8 flex flex-col items-center gap-4 pt-4 pb-6"><input type="text"
                     placeholder="Email..."
                     class="h-[35px] rounded-lg border border-solid border-gray-300 px-4 focus:shadow-input-focus focus:outline-none font-medium py-2 flex-1 sm:mb-0 w-full bg-white"><button
-                    class="hover:bg-always-green-grass sm:w-auto w-full px-6 py-1 font-semibold text-center text-white transition-all duration-300 bg-always-green-grass rounded-lg cursor-pointer">Share
+                    class="hover:bg-main sm:w-auto w-full px-6 py-1 font-semibold text-center text-white transition-all duration-300 bg-main rounded-lg cursor-pointer">Share
                     App Link</button></div>
             <div class="border-y py-4 border-gray-300">
                 <div class="lg:flex-row flex flex-col items-center justify-between">
@@ -50,13 +50,13 @@
                 <div class="md:mb-0 mb-4"><span class="text-sm font-medium text-gray-400">© 2022 <span> - 2024
                         </span>FreshCart e-Commerce HTML Template. All rights reserved.</span>
                     <p class="text-sm font-medium text-gray-400"> Powered by <a href="https://codescandy.com/"
-                            class="text-always-green-grass">Codescandy</a></p>
+                            class="text-main">Codescandy</a></p>
                 </div>
                 <div>
                     <ul class="flex items-center text-sm font-medium text-gray-400">
                         <li class="mr-2">Follow us on</li>
                         <li
-                            class="hover:text-always-green-grass hover:border-always-green-grass p-1 mr-2 transition-all duration-300 border border-gray-400 rounded-md cursor-pointer">
+                            class="hover:text-main hover:border-main p-1 mr-2 transition-all duration-300 border border-gray-400 rounded-md cursor-pointer">
                             <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
                                 height="18" width="18" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -65,7 +65,7 @@
                             </svg>
                         </li>
                         <li
-                            class="hover:text-always-green-grass hover:border-always-green-grass p-1 mr-2 transition-all duration-300 border border-gray-400 rounded-md cursor-pointer">
+                            class="hover:text-main hover:border-main p-1 mr-2 transition-all duration-300 border border-gray-400 rounded-md cursor-pointer">
                             <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
                                 height="18" width="18" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -74,7 +74,7 @@
                             </svg>
                         </li>
                         <li
-                            class="hover:text-always-green-grass hover:border-always-green-grass p-1 transition-all duration-300 border border-gray-400 rounded-md cursor-pointer">
+                            class="hover:text-main hover:border-main p-1 transition-all duration-300 border border-gray-400 rounded-md cursor-pointer">
                             <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512"
                                 height="18" width="18" xmlns="http://www.w3.org/2000/svg">
                                 <path

@@ -47,11 +47,11 @@
                                 </div>
                             </div>
                             <button type="submit" :disabled="isSubmitting"
-                                class="hover:bg-always-green-grass focus:ring-always-green-grass disabled:opacity-65 disabled:cursor-not-allowed w-full px-4 py-2 mx-auto mt-5 font-semibold text-center text-white transition-all duration-300 bg-always-green-grass rounded-lg cursor-pointer">
+                                class="hover:bg-main focus:ring-main disabled:opacity-65 disabled:cursor-not-allowed w-full px-4 py-2 mx-auto mt-5 font-semibold text-center text-white transition-all duration-300 bg-main rounded-lg cursor-pointer">
                                 Sign Up
                             </button>
                             <p class="mt-5 text-base font-medium">You have an account? <router-link
-                                    class="text-always-green-grass" to="/signin">
+                                    class="text-main" to="/signin">
                                     Sign in
                                 </router-link></p>
                         </Form>
