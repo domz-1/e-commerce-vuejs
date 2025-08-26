@@ -72,7 +72,7 @@ const router = createRouter({
 });
 
 // Route guard implementation
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
     // Import the auth store inside the guard to avoid circular dependencies
     const { isAuthenticated } = useAuthStore();
 

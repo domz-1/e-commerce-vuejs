@@ -37,9 +37,7 @@ const showDetails = (event: Event) => {
     event.stopPropagation();
     router.push(`/product/${props.product?.id}`);
 };
-const closeLoginModal = () => {
-    showLoginModal.value = false;
-};
+
 </script>
 <template>
     <div
