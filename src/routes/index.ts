@@ -25,19 +25,19 @@ const routes = [
                 path: 'brands',
                 name: 'brands',
                 component: Brands,
-                meta: { requiresAuth: true }, // Requires authentication
+                meta: { requiresAuth: true },
             },
             {
                 path: 'products',
                 name: 'products',
                 component: Products,
-                meta: { requiresAuth: true }, // Requires authentication
+                meta: { requiresAuth: true },
             },
             {
                 path: 'categories',
                 name: 'categories',
                 component: Categories,
-                meta: { requiresAuth: true }, // Requires authentication
+                meta: { requiresAuth: true },
             },
         ],
     },
@@ -49,13 +49,13 @@ const routes = [
                 path: '/signin',
                 name: 'signin',
                 component: SignIn,
-                meta: { requiresGuest: true }, // Only accessible to guests (non-authenticated users)
+                meta: { requiresGuest: true }, 
             },
             {
                 path: '/signup',
                 name: 'signup',
                 component: SignUp,
-                meta: { requiresGuest: true }, // Only accessible to guests
+                meta: { requiresGuest: true }, 
             },
         ],
     },
@@ -76,7 +76,6 @@ router.beforeEach((to, from, next) => {
     // Import the auth store inside the guard to avoid circular dependencies
     const { isAuthenticated } = useAuthStore();
 
-
     // Check if the route requires authentication
     if (to.matched.some((record) => record.meta.requiresAuth)) {
         if (!isAuthenticated) {
@@ -85,8 +84,7 @@ router.beforeEach((to, from, next) => {
         } else {
             next(); // Proceed to the route
         }
-    }
-    else if (to.matched.some((record) => record.meta.requiresGuest)) {
+    } else if (to.matched.some((record) => record.meta.requiresGuest)) {
         if (isAuthenticated) {
             next({ name: 'home' });
         } else {
