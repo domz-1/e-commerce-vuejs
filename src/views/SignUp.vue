@@ -18,7 +18,7 @@
                                 <div class="flex justify-between mb-3">
                                     <label class="text-sm font-medium" :for="field.id">{{ field.label }}</label>
                                     <span v-if="errors[field.id]" class="text-sm text-red-500">{{ errors[field.id]
-                                    }}</span>
+                                        }}</span>
                                 </div>
                                 <div :class="{ 'relative flex': field.type === 'password' }">
                                     <Field :type="getFieldType(field)" :id="field.id" :name="field.id"
@@ -50,8 +50,8 @@
                                 class="hover:bg-main focus:ring-main disabled:opacity-65 disabled:cursor-not-allowed w-full px-4 py-2 mx-auto mt-5 font-semibold text-center text-white transition-all duration-300 bg-main rounded-lg cursor-pointer">
                                 Sign Up
                             </button>
-                            <p class="mt-5 text-base font-medium">You have an account? <router-link
-                                    class="text-main" to="/signin">
+                            <p class="mt-5 text-base font-medium">You have an account? <router-link class="text-main"
+                                    to="/signin">
                                     Sign in
                                 </router-link></p>
                         </Form>
@@ -65,9 +65,21 @@
 import { ref } from 'vue';
 import { Form, Field } from 'vee-validate';
 import { useRouter } from 'vue-router';
-import { signUp } from '../api/auth';
+import { useAuthStore } from '../store/authStore';
 import { signUpSchema } from '../schemas/signUpSchema';
 const router = useRouter();
+const {
+    isAuth,
+    user,
+
+    // Actions
+    signUp,
+    signIn,
+    signOut,
+
+    // Getters
+    isAuthenticated,
+    currentUser, } = useAuthStore();
 const errorMessage = ref('');
 const showPassword = ref({
     password: false,

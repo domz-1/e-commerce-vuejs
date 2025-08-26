@@ -69,9 +69,21 @@
 import { ref } from 'vue';
 import { Form, Field } from 'vee-validate';
 import { useRouter } from 'vue-router';
-import { signIn } from '../api/auth';
+import { useAuthStore } from '../store/authStore';
 import { signInSchema } from '../schemas/signInSchema';
 const router = useRouter();
+const {
+    isAuth,
+    user,
+
+    // Actions
+    signUp,
+    signIn,
+    signOut,
+
+    // Getters
+    isAuthenticated,
+    currentUser, } = useAuthStore();
 const errorMessage = ref('');
 const showPassword = ref({
     password: false,
