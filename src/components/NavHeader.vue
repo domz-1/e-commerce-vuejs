@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useAuthStore } from '../store/authStore';
+import { useCartStore } from '../store/cartStore';
 const {
     signOut,
     isAuthenticated, } = useAuthStore();
@@ -16,6 +17,10 @@ const isActive = (path: string) => {
 const toggleMobileMenu = () => {
     isMobileMenuOpen.value = !isMobileMenuOpen.value;
 };
+const cartStore = useCartStore();
+const cartItemsIds = ref(cartStore.cartItemsIds);
+
+
 </script>
 <template>
     <nav class="bg-white select-none fixed z-30 w-full top-0">
@@ -73,6 +78,23 @@ const toggleMobileMenu = () => {
                         </div>
                     </div>
                 </div>
+                <router-link v-if="isAuthenticated" to="/cart" class="relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000"
+                        fill="none">
+                        <path
+                            d="M10.5 20.25C10.5 20.6642 10.1642 21 9.75 21C9.33579 21 9 20.6642 9 20.25C9 19.8358 9.33579 19.5 9.75 19.5C10.1642 19.5 10.5 19.8358 10.5 20.25Z"
+                            stroke="#141B34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M19 20.25C19 20.6642 18.6642 21 18.25 21C17.8358 21 17.5 20.6642 17.5 20.25C17.5 19.8358 17.8358 19.5 18.25 19.5C18.6642 19.5 19 19.8358 19 20.25Z"
+                            stroke="#141B34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M2 3H2.20664C3.53124 3 4.19354 3 4.6255 3.40221C5.05746 3.80441 5.10464 4.46503 5.19902 5.78626L5.45035 9.30496C5.5924 11.2936 5.66342 12.2879 5.96476 13.0961C6.62531 14.8677 8.08229 16.2244 9.89648 16.757C10.7241 17 11.7267 17 13.7317 17C15.8373 17 16.89 17 17.7417 16.7416C19.6593 16.1599 21.1599 14.6593 21.7416 12.7417C22 11.89 22 10.8433 22 8.75C22 8.05222 22 7.70333 21.9139 7.41943C21.72 6.78023 21.2198 6.28002 20.5806 6.08612C20.2967 6 19.9478 6 19.25 6H5.5"
+                            stroke="#141B34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M16 10V13M11 10V13" stroke="#141B34" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                    <p class="absolute -top-2 -left-2 bg-main text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">{{ cartItemsIds.length }}</p>
+                </router-link>
                 <div v-if="!isAuthenticated"
                     class="md:static md:inset-auto md:ml-6 md:pr-0 absolute inset-y-0 right-0 flex items-center pr-2">
                     <RouterLink
@@ -83,9 +105,10 @@ const toggleMobileMenu = () => {
                     class="md:static md:inset-auto md:ml-6 md:pr-0 absolute inset-y-0 right-0 flex items-center pr-2"
                     @click="signOut">
                     <p
-                        class="sm:py-2 sm:px-4 bg-transparent border-2 border-main rounded-lg text-gray-500 sm:text-base hover:bg-main hover:text-white text-sm pb-[5px] pt-1 px-2"
-                    >Sign out </p>
+                        class="sm:py-2 sm:px-4 bg-transparent border-2 border-main rounded-lg text-gray-500 sm:text-base hover:bg-main hover:text-white text-sm pb-[5px] pt-1 px-2">
+                        Sign out </p>
                 </div>
+
             </div>
         </div>
         <div class="md:hidden" :class="{ 'hidden': !isMobileMenuOpen }">

@@ -15,32 +15,23 @@ interface ApiResponse {
     message?: string;
 }
 export const useAuthStore = defineStore('authStore', () => {
-    // State
     const isAuth = ref(false);
     const user = ref<User>({});
-    // Check if token exists on store initialization
-    const token = localStorage.getItem('token');
+    const token = ref(localStorage.getItem('token'));
     if (token) {
         isAuth.value = true;
-        // You might want to decode the token here to get user info
-        // or make an API call to get user data
     }
-    // Helper function to set authentication state
-    const setAuthState = (token: string, userData: User) => {
-        localStorage.setItem('token', token);
+    const setAuthState = (resToken: string, userData: User) => {
+        localStorage.setItem('token', resToken);
+        token.value = resToken;
         isAuth.value = true;
         user.value = userData;
     };
-    // Actions - using your existing API functions
     const signUp = async (data: any): Promise<ApiResponse> => {
         const result = await apiSignUp(data);
         if (result?.success && result?.data) {
-            // Extract token and user data from the response
-            // Adjust this based on your actual response structure
             const responseData = result.data;
             if (responseData.token) {
-                // If user data is available in the response, use it
-                // Otherwise, you might need to make another API call to get user info
                 const userData = responseData.user || {};
                 setAuthState(responseData.token, userData);
             }
@@ -50,11 +41,8 @@ export const useAuthStore = defineStore('authStore', () => {
     const signIn = async (data: any): Promise<ApiResponse> => {
         const result = await apiSignIn(data);
         if (result?.success && result?.data) {
-            // Extract token and user data from the response
-            // Adjust this based on your actual response structure
             const responseData = result.data;
             if (responseData.token) {
-                // If user data is available in the response, use it
                 const userData = responseData.user || {};
                 setAuthState(responseData.token, userData);
             }
@@ -67,6 +55,7 @@ export const useAuthStore = defineStore('authStore', () => {
         isAuth.value = false;
         user.value = {};
         router.push('/signin');
+        token.value=""
     };
     // Getters
     const isAuthenticated = computed(() => isAuth.value);
@@ -82,5 +71,6 @@ export const useAuthStore = defineStore('authStore', () => {
         // Getters
         isAuthenticated,
         currentUser,
+        token
     };
 });
