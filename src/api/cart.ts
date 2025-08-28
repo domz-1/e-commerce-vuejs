@@ -3,7 +3,6 @@ const token = localStorage.getItem("token")
 export const addProductToCart = async (productId: string) => {
     try {
         console.log(productId);
-        
         const response = await api.post(
             '/cart',
             { productId: productId },
@@ -14,7 +13,6 @@ export const addProductToCart = async (productId: string) => {
             }
         );
         console.log(response);
-        
         return response.data;
     } catch (error) {
         throw error;
@@ -34,6 +32,7 @@ export const updateCartItemCount = async (
                 },
             }
         );
+        console.log(response);
         return response.data;
     } catch (error) {
         throw error;

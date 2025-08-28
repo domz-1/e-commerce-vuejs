@@ -1,11 +1,19 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useAuthStore } from '../store/authStore';
 import { useCartStore } from '../store/cartStore';
-const {
-    signOut,
-    isAuthenticated, } = useAuthStore();
+
+const { signOut, isAuthenticated } = useAuthStore();
+const { cartItemsIds, fetchCart } = useCartStore();
+
+// Add this to fetch cart when component mounts
+onMounted(async () => {
+  if (isAuthenticated) {
+    await fetchCart();
+  }
+});
+
 const isMobileMenuOpen = ref(false);
 const route = useRoute();
 const isActive = (path: string) => {
@@ -17,8 +25,8 @@ const isActive = (path: string) => {
 const toggleMobileMenu = () => {
     isMobileMenuOpen.value = !isMobileMenuOpen.value;
 };
-const cartStore = useCartStore();
-const cartItemsIds = ref(cartStore.cartItemsIds);
+// const { numCartItems } = useCartStore();
+// const numCartItems = ref(cartStore.numCartItems);
 
 
 </script>
@@ -93,7 +101,7 @@ const cartItemsIds = ref(cartStore.cartItemsIds);
                         <path d="M16 10V13M11 10V13" stroke="#141B34" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
                     </svg>
-                    <p class="absolute -top-2 -left-2 bg-main text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">{{ cartItemsIds.length }}</p>
+                    <p class="absolute -top-2 -left-2 bg-main text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">{{ cartItemsIds.length || 0 }}</p>
                 </router-link>
                 <div v-if="!isAuthenticated"
                     class="md:static md:inset-auto md:ml-6 md:pr-0 absolute inset-y-0 right-0 flex items-center pr-2">
