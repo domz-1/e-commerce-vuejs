@@ -13,6 +13,7 @@ import Orders from '../views/Orders.vue';
 import Checkout from '../views/Checkout.vue';
 import WishList from '../views/WishList.vue';
 import { useAuthStore } from '../store/authStore';
+import ForgetPassword from '../views/ForgetPassword.vue';
 const routes = [
     {
         path: '/',
@@ -89,6 +90,12 @@ const routes = [
                 component: SignUp,
                 meta: { requiresGuest: true },
             },
+            {
+                path: '/forget-password',
+                name: 'forget-password',
+                component: ForgetPassword,
+                meta: { requiresGuest: true },
+            },
         ],
     },
     {
@@ -115,8 +122,7 @@ router.beforeEach((to, _from, next) => {
         } else {
             next();
         }
-    }
-    else {
+    } else {
         next();
     }
 });

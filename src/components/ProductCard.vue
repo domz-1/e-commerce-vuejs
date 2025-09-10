@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, onMounted, ref, watch } from 'vue';
+import { defineProps, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import LoginModel from './LoginModel.vue';
@@ -25,9 +25,8 @@ const props = defineProps({
 
 const isLiked = ref(false);
 const showLoginModal = ref(false);
-const isProductInCart = ref(false);
 
-const addProductToCart = (event: Event) => { // Fix: Typo in function name
+const addProductToCart = (event: Event) => {
     event.preventDefault();
     event.stopPropagation();
     if (!isAuthenticated.value) {
@@ -35,7 +34,6 @@ const addProductToCart = (event: Event) => { // Fix: Typo in function name
         return;
     }
     addToCart(props.product?.id);
-    isProductInCart.value = true; // Update cart status
 };
 
 const toggleLike = () => {
@@ -46,19 +44,6 @@ const toggleLike = () => {
 const showDetails = () => {
     router.push(`/product/${props.product?.id}`);
 };
-
-onMounted(() => {
-    if (props.product?.id) {
-        isProductInCart.value = cartItemsIds.value.includes(props.product.id);
-    }
-});
-
-// Fix: Watch for changes in cart items to update button state
-watch(cartItemsIds, (newCartItems) => {
-    if (props.product?.id) {
-        isProductInCart.value = newCartItems.includes(props.product.id);
-    }
-}, { deep: true });
 </script>
 
 <template>
@@ -94,13 +79,8 @@ watch(cartItemsIds, (newCartItems) => {
             <div class="flex justify-between items-center">
                 <span class="text-main text-lg font-bold">${{ product.price }}</span>
                 <div class="flex gap-1">
-                    <button @click="addProductToCart" :disabled="isProductInCart" :class="[
-                        'px-3 py-1 text-sm rounded-full transition-colors',
-                        isProductInCart
-                            ? 'bg-green-500 text-white cursor-not-allowed'
-                            : 'bg-main text-white hover:bg-main/90'
-                    ]">
-                        {{ isProductInCart ? 'Added' : 'Add' }}
+                    <button @click="addProductToCart" :class="['px-3 py-1 text-sm rounded-full cursor-pointer transition-colors','bg-main text-white hover:bg-main/90']">
+                        Add
                     </button>
                     <button @click="showDetails"
                         class="px-3 py-1 text-sm rounded-full transition-colors bg-gray-400 text-white hover:bg-gray-500">

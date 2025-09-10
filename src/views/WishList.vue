@@ -1,9 +1,19 @@
 <script setup>
-import { getWishlist } from '../api/wishlist';
+import { getWishlist, removeFromWishlist } from '../api/wishlist';
 import { onMounted, ref } from 'vue';
 const wishlist = ref([]);
 const isLoading = ref(false);
 const error = ref(null);
+
+const handleRemoveFromWishlist = async (productId) => {
+    try {
+        await removeFromWishlist(productId);
+        wishlist.value = wishlist.value.filter(item => item._id !== productId);
+    } catch (err) {
+        error.value = 'Failed to remove item from wishlist';
+        console.error('Error removing from wishlist:', err);
+    }
+};
 
 onMounted(async () => {
     try {
@@ -46,6 +56,14 @@ onMounted(async () => {
                         :alt="item.title"
                         @error="$event.target.src='https://via.placeholder.com/300x200?text=Image+Not+Found'"
                     >
+                    <button 
+                        @click="handleRemoveFromWishlist(item._id)"
+                        class="absolute top-2 right-2 bg-red-500 text-white p-2 rounded-full hover:bg-red-600 transition-colors"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
                 </div>
                 <div class="p-4">
                     <h5 class="text-xl font-semibold mb-2 text-gray-800 line-clamp-1">{{ item.title }}</h5>

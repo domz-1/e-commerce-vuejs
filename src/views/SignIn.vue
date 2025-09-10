@@ -19,7 +19,7 @@
                                 <div class="flex justify-between mb-3">
                                     <label class="text-sm font-medium" :for="field.id">{{ field.label }}</label>
                                     <span v-if="errors[field.id]" class="text-sm text-red-500">{{ errors[field.id]
-                                        }}</span>
+                                    }}</span>
                                 </div>
                                 <div :class="{ 'relative flex': field.type === 'password' }">
                                     <Field :type="getFieldType(field)" :id="field.id" :name="field.id"
@@ -56,6 +56,11 @@
                             <p class="mt-5 text-base font-medium">Don't have an account?
                                 <router-link to="/signup" class="text-main">
                                     Sign Up
+                                </router-link>
+                            </p>
+                            <p class="mt-5 text-base font-medium">Forgot your password?
+                                <router-link to="/forget-password" class="text-main">
+                                    Reset it here
                                 </router-link>
                             </p>
                         </Form>
