@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router';
-// Views
 import HomeLayout from '../layouts/HomeLayout.vue';
 import Home from '../views/Home.vue';
 import Products from '../views/Products.vue';
@@ -10,8 +9,10 @@ import SignUp from '../views/SignUp.vue';
 import NotFound from '../views/NotFound.vue';
 import ProductDetails from '../views/ProductDetails.vue';
 import Cart from '../views/Cart.vue';
+import Orders from '../views/Orders.vue';
+import Checkout from '../views/Checkout.vue';
+import WishList from '../views/WishList.vue';
 import { useAuthStore } from '../store/authStore';
-// Router configuration
 const routes = [
     {
         path: '/',
@@ -50,6 +51,24 @@ const routes = [
                 path: 'cart',
                 name: 'cart',
                 component: Cart,
+                meta: { requiresAuth: true },
+            },
+            {
+                path: 'orders',
+                name: 'orders',
+                component: Orders,
+                meta: { requiresAuth: true },
+            },
+            {
+                path: 'checkout/:cartId',
+                name: 'checkout',
+                component: Checkout,
+                meta: { requiresAuth: true },
+            },
+            {
+                path: 'wishlist',
+                name: 'wishlist',
+                component: WishList,
                 meta: { requiresAuth: true },
             },
         ],
@@ -97,7 +116,6 @@ router.beforeEach((to, _from, next) => {
             next();
         }
     }
-    // For all other routes
     else {
         next();
     }

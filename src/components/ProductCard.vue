@@ -5,7 +5,7 @@ import { storeToRefs } from 'pinia';
 import LoginModel from './LoginModel.vue';
 import { useAuthStore } from '../store/authStore';
 import { useCartStore } from '../store/cartStore';
-
+import { addToWishlist } from '../api/wishlist';
 const router = useRouter();
 
 // Fix: Use storeToRefs for reactivity
@@ -38,14 +38,9 @@ const addProductToCart = (event: Event) => { // Fix: Typo in function name
     isProductInCart.value = true; // Update cart status
 };
 
-const toggleLike = (event: Event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    if (!isAuthenticated.value) {
-        showLoginModal.value = true;
-        return;
-    }
-    isLiked.value = !isLiked.value;
+const toggleLike = () => {
+    const res = addToWishlist(props.product?.id);
+    console.log(res);
 };
 
 const showDetails = () => {

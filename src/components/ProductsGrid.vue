@@ -11,6 +11,12 @@ onMounted(async () => {
     products.value = res.data;
     loading.value = false;
 });
+const props = defineProps({
+    max: {
+        type: Number,
+        default: 200,
+    },
+})
 </script>
 <template>
     <div class="container mx-auto px-8">
@@ -21,7 +27,7 @@ onMounted(async () => {
                 </div>
             </template>
             <template v-else>
-                <div v-for="product in products.slice(0, 8)" :key="product.id">
+                <div v-for="product in products.slice(0, max)" :key="product.id">
                     <ProductCard :product="product" />
                 </div>
             </template>

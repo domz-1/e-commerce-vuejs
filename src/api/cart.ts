@@ -1,23 +1,27 @@
 import api from "./api";
 const token = localStorage.getItem("token")
+
 export const addProductToCart = async (productId: string) => {
     try {
-        console.log(productId);
         const response = await api.post(
             '/cart',
-            { productId: productId },
+            { productId },
             {
                 headers: {
                     token: `${token}`,
                 },
             }
         );
-        console.log(response);
+        // Store cartOwner (userId) in localStorage if not already present
+        if (!localStorage.getItem('cartOwner') && response.data.data.cartOwner) {
+            localStorage.setItem('cartOwner', response.data.data.cartOwner);
+        }
         return response.data;
     } catch (error) {
         throw error;
     }
 }
+
 export const updateCartItemCount = async (
     cartItemId: string,
     count: number
@@ -32,12 +36,12 @@ export const updateCartItemCount = async (
                 },
             }
         );
-        console.log(response);
         return response.data;
     } catch (error) {
         throw error;
     }
 };
+
 export const getCart = async () => {
     try {
         const response = await api.get('/cart', {
@@ -50,6 +54,7 @@ export const getCart = async () => {
         throw error;
     }
 }
+
 export const removeCartItem = async (cartItemId: string) => {
     try {
         const response = await api.delete(`/cart/${cartItemId}`, {
@@ -62,6 +67,7 @@ export const removeCartItem = async (cartItemId: string) => {
         throw error;
     }
 };
+
 export const clearCart = async () => {
     try {
         const response = await api.delete('/cart', {

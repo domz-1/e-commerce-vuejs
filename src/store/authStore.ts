@@ -6,30 +6,38 @@ import {
     signIn as apiSignIn,
     signOut as apiSignOut,
 } from '../api/auth'; // Adjust the import path as needed
+
 interface User {
     [key: string]: any;
 }
+
 interface ApiResponse {
     success: boolean;
     data?: any;
     message?: string;
 }
+
 export const useAuthStore = defineStore('authStore', () => {
     const isAuth = ref(false);
-    const user = ref<User>({});
+    const user = ref<User>(JSON.parse(localStorage.getItem('user') || '{}'));
     const token = ref(localStorage.getItem('token'));
-    if (token) {
+    const router = useRouter();
+
+    if (token.value) {
         isAuth.value = true;
     }
+
     const setAuthState = (resToken: string, userData: User) => {
         localStorage.setItem('token', resToken);
+        localStorage.setItem('user', JSON.stringify(userData));
         token.value = resToken;
         isAuth.value = true;
         user.value = userData;
     };
+
     const signUp = async (data: any): Promise<ApiResponse> => {
         const result = await apiSignUp(data);
-        if (result?.success && result?.data) {
+        if (result?.success) {
             const responseData = result.data;
             if (responseData.token) {
                 const userData = responseData.user || {};
@@ -38,8 +46,10 @@ export const useAuthStore = defineStore('authStore', () => {
         }
         return result || { success: false, message: 'Unknown error occurred' };
     };
+
     const signIn = async (data: any): Promise<ApiResponse> => {
         const result = await apiSignIn(data);
+
         if (result?.success && result?.data) {
             const responseData = result.data;
             if (responseData.token) {
@@ -49,17 +59,21 @@ export const useAuthStore = defineStore('authStore', () => {
         }
         return result || { success: false, message: 'Unknown error occurred' };
     };
+
     const signOut = () => {
-        const router = useRouter();
-        apiSignOut(); // Call your existing signOut function
+        apiSignOut();
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
         isAuth.value = false;
         user.value = {};
+        token.value = "";
         router.push('/signin');
-        token.value=""
     };
+
     // Getters
     const isAuthenticated = computed(() => isAuth.value);
     const currentUser = computed(() => user.value);
+
     return {
         // State
         isAuth,

@@ -114,7 +114,6 @@ const togglePasswordVisibility = (fieldId) => {
 const onSubmit = async (values, { setSubmitting }) => {
     errorMessage.value = '';
     const res = await signIn(values);
-    console.log(res);
     if (res.success) {
         router.push('/');
     } else {

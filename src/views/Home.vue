@@ -30,8 +30,10 @@
     </div>
   </div>
   <div class="container mx-auto px-8 flex flex-col justify-center items-center py-8">
+    <h2 class="text-gray-900 text-5xl md:text-6xl font-bold mb-4">Our Brands</h2>
+    <BrandsSwiper />
     <h2 class="text-gray-900 text-5xl md:text-6xl font-bold mb-4">Products</h2>
-    <ProductsGrid />
+    <ProductsGrid :max="8" />
     <button @click="showMoreProducts"
       class="bg-main hover:bg-main/90 transition-colors px-6 py-3 text-white rounded-lg my-8 font-medium">
       Show More Products
@@ -43,11 +45,10 @@ import RotatingText from '../components/RotatingText.vue';
 import { ref } from 'vue';
 import ProductsGrid from '../components/ProductsGrid.vue';
 import { useRouter } from 'vue-router';
+import BrandsSwiper from '../components/BrandsSwiper.vue';
 const router = useRouter();
 const feature = ref();
 const showMoreProducts = () => {
   router.push('/products');
-  // Add your show more products logic here
-  console.log('Showing more products...');
 };
 </script>

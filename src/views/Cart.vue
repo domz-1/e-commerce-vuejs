@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import { useCartStore } from '../store/cartStore'
+import { useRouter } from 'vue-router'
 
 const cartStore = useCartStore()
 const cartData = ref({
@@ -10,7 +11,7 @@ const cartData = ref({
     },
     numOfCartItems: 0
 })
-
+const cartId = ref('')
 // Loading state
 const isLoading = ref(false)
 
@@ -21,6 +22,7 @@ onMounted(async () => {
     isLoading.value = true
     try {
         const res = await fetchCart()
+        cartId.value = res.data._id
         cartData.value = res
     } finally {
         isLoading.value = false
@@ -65,7 +67,6 @@ const handleUpdateCount = async (cartItemId, newCount) => {
 }
 </script>
 
-
 <template>
     <div class="min-h-screen py-8 relative">
         <!-- Loading overlay -->
@@ -89,7 +90,6 @@ const handleUpdateCount = async (cartItemId, newCount) => {
                     Clear Cart
                 </button>
             </div>
-
 
             <div v-if="cartData.data.products?.length > 0">
                 <!-- Cart Items -->
@@ -116,8 +116,7 @@ const handleUpdateCount = async (cartItemId, newCount) => {
                                     <div
                                         class="flex flex-col sm:flex-row sm:items-center sm:space-x-6 space-y-2 sm:space-y-0">
                                         <div class="flex items-center space-x-4 text-sm text-gray-600">
-                                            <span
-                                                class="bg-green-100 text-green-800 px-2 py-1 rounded-full font-medium">
+                                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full font-medium">
                                                 {{ item.price }} EGP
                                             </span>
                                             <span class="text-gray-500">Brand: {{ item.product.brand?.name }}</span>
@@ -174,7 +173,7 @@ const handleUpdateCount = async (cartItemId, newCount) => {
                                 {{ cartData.numOfCartItems }} item{{ cartData.numOfCartItems !== 1 ? 's' : '' }} in cart
                             </p>
                         </div>
-                        <button
+                        <router-link :to="{ path: '/checkout/' + cartId, params: { cartId: cartId }}"
                             class="w-full sm:w-auto bg-main hover:bg-main/90 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl transform">
                             <div class="flex items-center justify-center space-x-2">
                                 <span>Proceed to Checkout</span>
@@ -183,7 +182,7 @@ const handleUpdateCount = async (cartItemId, newCount) => {
                                         d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                 </svg>
                             </div>
-                        </button>
+                        </router-link>
                     </div>
                 </div>
             </div>

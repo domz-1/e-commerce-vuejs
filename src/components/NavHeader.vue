@@ -1,19 +1,18 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useAuthStore } from '../store/authStore';
 import { useCartStore } from '../store/cartStore';
-
-const { signOut, isAuthenticated } = useAuthStore();
+import { storeToRefs } from 'pinia';
+const { isAuth } = storeToRefs(useAuthStore());
+const { signOut } = useAuthStore();
 const { cartItemsIds, fetchCart } = useCartStore();
-
 // Add this to fetch cart when component mounts
 onMounted(async () => {
-  if (isAuthenticated) {
+  if (isAuth) {
     await fetchCart();
   }
 });
-
 const isMobileMenuOpen = ref(false);
 const route = useRoute();
 const isActive = (path: string) => {
@@ -25,10 +24,6 @@ const isActive = (path: string) => {
 const toggleMobileMenu = () => {
     isMobileMenuOpen.value = !isMobileMenuOpen.value;
 };
-// const { numCartItems } = useCartStore();
-// const numCartItems = ref(cartStore.numCartItems);
-
-
 </script>
 <template>
     <nav class="bg-white select-none fixed z-30 w-full top-0">
@@ -83,10 +78,22 @@ const toggleMobileMenu = () => {
                                     isActive('/categories') ? 'bg-main text-white' : 'text-gray-500'
                                 ]">Categories</RouterLink>
                             </li>
+                            <li class="flex items-center justify-center">
+                                <RouterLink to="/orders" :class="[
+                                    'px-3 py-1.5 rounded-md font-semibold transition-all duration-300',
+                                    isActive('/orders') ? 'bg-main text-white' : 'text-gray-500'
+                                ]">Orders</RouterLink>
+                            </li>
+                            <li class="flex items-center justify-center">
+                                <RouterLink to="/wishlist" :class="[
+                                    'px-3 py-1.5 rounded-md font-semibold transition-all duration-300',
+                                    isActive('/wishlist') ? 'bg-main text-white' : 'text-gray-500'
+                                ]">Wishlist</RouterLink>
+                            </li>
                         </div>
                     </div>
                 </div>
-                <router-link v-if="isAuthenticated" to="/cart" class="relative">
+                <router-link v-if="isAuth" to="/cart" class="relative">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000"
                         fill="none">
                         <path
@@ -103,7 +110,7 @@ const toggleMobileMenu = () => {
                     </svg>
                     <p class="absolute -top-2 -left-2 bg-main text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">{{ cartItemsIds.length || 0 }}</p>
                 </router-link>
-                <div v-if="!isAuthenticated"
+                <div v-if="!isAuth"
                     class="md:static md:inset-auto md:ml-6 md:pr-0 absolute inset-y-0 right-0 flex items-center pr-2">
                     <RouterLink
                         class="sm:py-2 sm:px-4 bg-transparent border-2 border-main rounded-lg text-gray-500 sm:text-base hover:bg-main hover:text-white text-sm pb-[5px] pt-1 px-2"
@@ -116,7 +123,6 @@ const toggleMobileMenu = () => {
                         class="sm:py-2 sm:px-4 bg-transparent border-2 border-main rounded-lg text-gray-500 sm:text-base hover:bg-main hover:text-white text-sm pb-[5px] pt-1 px-2">
                         Sign out </p>
                 </div>
-
             </div>
         </div>
         <div class="md:hidden" :class="{ 'hidden': !isMobileMenuOpen }">
@@ -144,6 +150,18 @@ const toggleMobileMenu = () => {
                         'px-3 py-1.5 rounded-md font-semibold transition-all duration-300 m-1 text-base',
                         isActive('/categories') ? 'bg-main text-white' : 'text-gray-500'
                     ]">Categories</RouterLink>
+                </li>
+                <li class="flex items-center justify-start ml-2">
+                    <RouterLink to="/orders" :class="[
+                        'px-3 py-1.5 rounded-md font-semibold transition-all duration-300 m-1 text-base',
+                        isActive('/orders') ? 'bg-main text-white' : 'text-gray-500'
+                    ]">Orders</RouterLink>
+                </li>
+                <li class="flex items-center justify-start ml-2">
+                    <RouterLink to="/wishlist" :class="[
+                        'px-3 py-1.5 rounded-md font-semibold transition-all duration-300 m-1 text-base',
+                        isActive('/wishlist') ? 'bg-main text-white' : 'text-gray-500'
+                    ]">Wishlist</RouterLink>
                 </li>
             </div>
         </div>
