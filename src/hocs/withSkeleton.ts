@@ -5,7 +5,7 @@ import {
     onMounted,
     nextTick,
     type Component,
-    type Ref,
+
     type VNode,
     type PropType,
     type SetupContext,
@@ -76,7 +76,7 @@ const originalDimensions = new WeakMap<Component, Map<string, DOMRect>>();
  */
 const detectSkeletonLayout = (
     component: Component,
-    sampleProps?: any
+    
 ): SkeletonElement[] => {
     const template = (component as any).template || '';
     const props = (component as any).props || {};
@@ -93,7 +93,6 @@ const detectSkeletonLayout = (
     const hasCategory = /category/i.test(template);
     const hasSold = /sold/i.test(template);
     const hasAvatar = /avatar/i.test(template);
-    const hasIcon = /icon/i.test(template);
 
     // Analyze props structure
     const propKeys = Object.keys(props);
@@ -107,9 +106,7 @@ const detectSkeletonLayout = (
         /description|content|text|body/i.test(key)
     );
     const hasPriceProp = propKeys.some((key) => /price|cost|amount/i.test(key));
-    const hasRatingProp = propKeys.some((key) =>
-        /rating|score|star/i.test(key)
-    );
+   
     const hasAvatarProp = propKeys.some((key) => /avatar/i.test(key));
 
     // Check for product-like structure (common e-commerce pattern)

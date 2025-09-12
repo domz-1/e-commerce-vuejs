@@ -13,7 +13,6 @@ const { isAuthenticated } = storeToRefs(useAuthStore());
 
 // Fix: Move cart store to top and destructure properly
 const cartStore = useCartStore();
-const { cartItemsIds } = storeToRefs(cartStore); // Fix: Use storeToRefs for reactive data
 const { addToCart } = cartStore; // Actions can be destructured normally
 
 const props = defineProps({

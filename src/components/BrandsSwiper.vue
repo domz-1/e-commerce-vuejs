@@ -49,13 +49,9 @@
 import { onMounted, ref } from 'vue';
 import { getBrands } from '../api/brands';
 import { Swiper, SwiperSlide } from 'swiper/vue';
-import { Autoplay, Pagination } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules';
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/thumbs';
-import 'swiper/css/free-mode';
+
 interface Brand {
     _id: string;
     name: string;
@@ -68,7 +64,6 @@ interface Brand {
 const brands = ref<Brand[]>([]);
 const loadingBrands = ref(true);
 const SwiperAutoplay = Autoplay;
-const SwiperPagination = Pagination;
 
 onMounted(async () => {
     try {

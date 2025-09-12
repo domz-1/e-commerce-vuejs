@@ -1,5 +1,4 @@
 import api from './api'
-import { getCart } from './cart'
 interface ShippingAddress {
   details: string
   phone: string

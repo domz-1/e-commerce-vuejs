@@ -23,12 +23,6 @@ interface CartProduct {
     price: number;
 }
 
-interface CartData {
-    _id: string;
-    cartOwner: string;
-    products: CartProduct[];
-    totalCartPrice: number;
-}
 
 export const useCartStore = defineStore('cart', () => {
     const cartItems = ref<CartProduct[] | null>(null);
